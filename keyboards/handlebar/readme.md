@@ -27,6 +27,7 @@ Enter the bootloader in 3 ways:
 * **Keycode in layout**: Press the key mapped to `QK_BOOT` if it is available
 
 
+[ ] Add working indicator
 [ ] Add a `UC_NEXT` key to move through the Unicode input methods
 [ ] Consider the dash/underscore move to %/^
 [ ] Consider the quote/dquot move to ( and )

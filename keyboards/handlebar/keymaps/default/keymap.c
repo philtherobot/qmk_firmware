@@ -107,64 +107,64 @@ enum custom_keycodes {
     CUSTOM_KC_EXTEND
 };
 
-// bool locked_into_extend = false;
-// bool extend_is_pressed = false;
+bool locked_into_extend = false;
+bool extend_is_pressed = false;
 
-// void toggle_extend_layer(void) {
-//     locked_into_extend = !locked_into_extend;
+void toggle_extend_layer(void) { 
+    locked_into_extend = !locked_into_extend;
 
-//     if(locked_into_extend)
-//         layer_on(EXTEND);
-//     else
-//         layer_off(EXTEND);
-// }
+    if(locked_into_extend)
+        layer_on(EXTEND);
+    else
+        layer_off(EXTEND);
+}
 
-// bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-//     if (record->event.pressed) {
-//         switch (keycode) {
-//             case CUSTOM_KC_EMAIL:
-//                  SEND_STRING("philtherobot@gmail.com");
-//                  return false;
-//             case CUSTOM_KC_EXTEND:
-//                 extend_is_pressed = true;
-//                 bool const isRightShift = get_mods() & MOD_BIT(KC_RIGHT_SHIFT);
-//                 if(isRightShift) {
-//                     toggle_extend_layer();
-//                 }
-//                 else {
-//                     layer_on(EXTEND);
-//                 }
-//                 return false;
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (record->event.pressed) {
+        switch (keycode) {
+            case CUSTOM_KC_EMAIL:
+                 SEND_STRING("philtherobot@gmail.com");
+                 return false;
+            case CUSTOM_KC_EXTEND:
+                extend_is_pressed = true;
+                bool const isRightShift = get_mods() & MOD_BIT(KC_RIGHT_SHIFT);
+                if(isRightShift) {
+                    toggle_extend_layer();
+                }
+                else {
+                    layer_on(EXTEND);
+                }
+                return false;
 
-//             case KC_RIGHT_SHIFT:
-//                 if(extend_is_pressed) {
-//                     toggle_extend_layer();
-//                     return false;
-//                 }
-//                 return true;
-//         }
-//     }
-//     else {  // key is released
+            case KC_RIGHT_SHIFT:
+                if(extend_is_pressed) {
+                    toggle_extend_layer();
+                    return false;
+                }
+                return true;
+        }
+    }
+    else {  // key is released
 
-//         switch (keycode) {
-//             case CUSTOM_KC_EXTEND:
-//                 extend_is_pressed = false;
-//                 if(!locked_into_extend) layer_off(EXTEND);
-//                 return false;
-//         }
-//     }
+        switch (keycode) {
+            case CUSTOM_KC_EXTEND:
+                extend_is_pressed = false;
+                if(!locked_into_extend) layer_off(EXTEND);
+                return false;
+        }
+    }
 
-//     return true;
-// }
+    return true;
+}
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASE] = 
     { VISUAL_TO_MATRIX( 
-                            KC_2,    KC_3,    KC_4,    KC_5,        KC_6,           KC_7,    KC_8,     KC_9,
-      KC_1,        KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,        KC_J,           KC_L,    KC_U,     KC_Y,    KC_SCLN, KC_0,
-      MO(EXTEND),  KC_A,    KC_R,    KC_S,    KC_T,    KC_G,        KC_M,           KC_N,    KC_E,     KC_I,    KC_O,    KC_BSLS,
-                   KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,        KC_SLSH,        KC_K,    KC_H,     KC_COMM, KC_DOT,
-                            KC_LCTL, KC_LSFT, KC_SPC,  KC_LALT,     OSL(SYMBOLS1),  KC_ENT,  KC_RSFT,  MO(FN)
+                                  KC_2,    KC_3,    KC_4,    KC_5,        KC_6,           KC_7,    KC_8,     KC_9,
+      KC_1,              KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,        KC_J,           KC_L,    KC_U,     KC_Y,    KC_SCLN, KC_0,
+      CUSTOM_KC_EXTEND,  KC_A,    KC_R,    KC_S,    KC_T,    KC_G,        KC_M,           KC_N,    KC_E,     KC_I,    KC_O,    KC_BSLS,
+                         KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,        KC_SLSH,        KC_K,    KC_H,     KC_COMM, KC_DOT,
+                                  KC_LCTL, KC_LSFT, KC_SPC,  KC_LALT,     OSL(SYMBOLS1),  KC_ENT,  KC_RSFT,  MO(FN)
     )
     },
 
@@ -194,12 +194,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [FN] = 
     { VISUAL_TO_MATRIX( 
-      //-----------//----------------//-----------//-----------//-----------//-----------     //-----------//-----------//-----------//-----------//-----------//-----------
-                                     KC_F2,       KC_F3,       KC_F4,       KC_F5,            KC_F6,       KC_F7,       KC_F8,       KC_F9,
-      KC_F1,       _______,          _______,     KC_VOLD,     KC_MUTE,     KC_VOLU,          KC_F11,      KC_F12,      _______,     KC_PSCR,     KC_PAUSE,    KC_F10,
-      _______,     _______,          _______,     KC_MPRV,     KC_MPLY,     KC_MNXT,          _______,     _______,     _______,     _______,     _______,     _______,
-                   CUSTOM_KC_EMAIL,  _______,     _______,     _______,     _______,          _______,     _______,     _______,     _______,     _______,
-                                     _______,     _______,     KC_LGUI,     _______,          _______,     _______,     KC_RALT,     _______
+      //-----------//--------//----------------//-----------//-----------//-----------     //-----------//-----------//-----------//-----------//-----------//-----------
+                             KC_F2,            KC_F3,       KC_F4,       KC_F5,            KC_F6,       KC_F7,       KC_F8,       KC_F9,
+      KC_F1,       _______,  _______,          KC_VOLD,     KC_MUTE,     KC_VOLU,          KC_F11,      KC_F12,      _______,     KC_PSCR,     KC_PAUSE,    KC_F10,
+      _______,     _______,  _______,          KC_MPRV,     KC_MPLY,     KC_MNXT,          _______,     _______,     _______,     _______,     _______,     _______,
+                   _______,  CUSTOM_KC_EMAIL,  _______,     _______,     _______,          _______,     _______,     _______,     _______,     _______,
+                                               _______,     _______,     KC_LGUI,     _______,          _______,     _______,     KC_RALT,     _______
     )
     }
 };
@@ -216,16 +216,16 @@ void keyboard_post_init_user(void) {
   rgblight_sethsv_at(0,0,0, 1);
 }
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (record->event.pressed) {
-        switch (keycode) {
-            case KC_CAPS:
-                 static int v = 40;
-                 rgblight_sethsv_at(0,128,v, 0);
-                 v = v == 0 ? 40 : 0;
-                 break;
-        }
-    }
+// bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+//     if (record->event.pressed) {
+//         switch (keycode) {
+//             case KC_CAPS:
+//                  static int v = 40;
+//                  rgblight_sethsv_at(0,128,v, 0);
+//                  v = v == 0 ? 40 : 0;
+//                  break;
+//         }
+//     }
 
-    return true;
-}
+//     return true;
+// }
