@@ -164,7 +164,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_1,              KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,        KC_J,           KC_L,    KC_U,     KC_Y,    KC_SCLN, KC_0,
       CUSTOM_KC_EXTEND,  KC_A,    KC_R,    KC_S,    KC_T,    KC_G,        KC_M,           KC_N,    KC_E,     KC_I,    KC_O,    KC_BSLS,
                          KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,        KC_K,           KC_H,    KC_COMM,  KC_DOT,  KC_SLSH,
-                                  KC_LCTL, KC_SPC,  KC_LSFT, KC_LALT,     OSL(SYMBOLS1),  KC_RSFT, KC_ENT,   MO(FN)
+                                  KC_LCTL, KC_SPC,  KC_LSFT, KC_LALT,     OSL(SYMBOLS1),  KC_RSFT, KC_ENT,   OSL(FN)
     )
     },
 
@@ -184,10 +184,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [SYMBOLS1] = 
     { VISUAL_TO_MATRIX( 
       //-----------//-------------//-------------//-----------------//-----------//-----------     //----------------//-----------------//------------------//-----------------//-----------------//-----------
-                                  _______,       _______,           _______,     _______,          _______,           _______,           _______,           KC_MINS,
-      KC_GRV,      UM(LAngQuot),  UM(RAngQuot),  S(KC_LBRC),        S(KC_RBRC),  _______,          _______,           UP(agrav, Agrav),  UP(ocirc, Ocirc),  UP(acirc, Acirc),  UP(icirc, Icirc),  KC_QUOT,
-      _______,     KC_LBRC,       KC_RBRC,       S(KC_9),           S(KC_0),     _______,          UP(idiae, Idiae),  UP(eacut, Eacut),  UP(egrav, Egrav),  UP(ecirc, Ecirc),  UP(ediae, Ediae),  _______,
-                   _______,       _______,       UP(ccedi, Ccedi),  KC_EQL,      S(KC_EQL),        _______,           _______,           UP(ucirc, Ucirc),  UP(ugrav, Ugrav),  UP(udiae, Udiae),
+                                  _______,       _______,           _______,     _______,          _______,           _______,           _______,           _______,
+      KC_GRV,      UM(LAngQuot),  UM(RAngQuot),  S(KC_LBRC),        S(KC_RBRC),  _______,          _______,           UP(agrav, Agrav),  UP(ocirc, Ocirc),  UP(acirc, Acirc),  UP(icirc, Icirc),  KC_DQUO,
+      _______,     KC_LBRC,       KC_RBRC,       S(KC_9),           S(KC_0),     _______,          UP(idiae, Idiae),  UP(eacut, Eacut),  UP(egrav, Egrav),  UP(ecirc, Ecirc),  UP(ediae, Ediae),  KC_QUOT,
+                   _______,       _______,       UP(ccedi, Ccedi),  KC_EQL,      S(KC_EQL),        KC_MINS,           KC_UNDS,           UP(ucirc, Ucirc),  UP(ugrav, Ugrav),  UP(udiae, Udiae),
                                   _______,       _______,           _______,     _______,          _______,           _______,           _______,           _______
     )
     },
@@ -197,9 +197,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       //-----------//--------//----------------//-----------//-----------//-----------     //-----------//-----------//-----------//-----------//-----------//-----------
                              KC_F2,            KC_F3,       KC_F4,       KC_F5,            KC_F6,       KC_F7,       KC_F8,       KC_F9,
       KC_F1,       _______,  _______,          KC_VOLD,     KC_MUTE,     KC_VOLU,          KC_F11,      KC_F12,      _______,     KC_PSCR,     KC_PAUSE,    KC_F10,
-      _______,     _______,  _______,          KC_MPRV,     KC_MPLY,     KC_MNXT,          _______,     _______,     _______,     _______,     _______,     _______,
-                   _______,  CUSTOM_KC_EMAIL,  _______,     _______,     _______,          _______,     _______,     _______,     _______,     _______,
-                                               _______,     _______,     KC_LGUI,     _______,          _______,     _______,     KC_RALT,     _______
+      _______,     _______,  _______,          KC_MPRV,     KC_MPLY,     KC_MNXT,          _______,     _______,     _______,     _______,     _______,     UC_NEXT,
+                   _______,  CUSTOM_KC_EMAIL,  _______,     _______,     _______,          _______,     _______,     _______,     _______,     QK_BOOT,
+                             _______,          _______,     KC_LGUI,     _______,          _______,     _______,     KC_RALT,     _______
     )
     }
 };

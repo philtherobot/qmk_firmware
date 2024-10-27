@@ -30,6 +30,7 @@ Enter the bootloader in 3 ways:
 [X] Roll / to .
 [X] Move SPC and ENT inward
 [ ] Add working indicator
-[ ] Add a `UC_NEXT` key to move through the Unicode input methods
-[ ] Consider the dash/underscore move to %/^
-[ ] Consider the quote/dquot move to ( and )
+[X] Add a `UC_NEXT` key to move through the Unicode input methods
+[X] Consider the dash/underscore move to %/^
+[X] Consider the quote/dquot move to SYM
+
