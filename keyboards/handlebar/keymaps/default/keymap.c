@@ -110,13 +110,25 @@ enum custom_keycodes {
 bool locked_into_extend = false;
 bool extend_is_pressed = false;
 
+void set_extend_layer(bool on)
+{
+    if(on) {
+        layer_on(EXTEND);
+        rgblight_sethsv_at(135,240,40, 0);
+    }
+    else {
+        layer_off(EXTEND);
+        rgblight_sethsv_at(135,240,0, 0);
+    }                    
+}
+
 void toggle_extend_layer(void) { 
     locked_into_extend = !locked_into_extend;
 
     if(locked_into_extend)
-        layer_on(EXTEND);
+        set_extend_layer(true);
     else
-        layer_off(EXTEND);
+        set_extend_layer(false);
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -132,7 +144,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     toggle_extend_layer();
                 }
                 else {
-                    layer_on(EXTEND);
+                    set_extend_layer(true);
                 }
                 return false;
 
@@ -149,12 +161,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         switch (keycode) {
             case CUSTOM_KC_EXTEND:
                 extend_is_pressed = false;
-                if(!locked_into_extend) layer_off(EXTEND);
+                if(!locked_into_extend) set_extend_layer(false);
                 return false;
         }
     }
 
     return true;
+}
+
+bool led_update_user(led_t led_state) {
+    if(led_state.caps_lock) {
+        rgblight_sethsv_at(15,200,0, 1);
+    }
+    else {
+        rgblight_sethsv_at(15,200,40, 1);
+    }
+
+    return false; // do not process any further
 }
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -219,7 +242,7 @@ void keyboard_post_init_user(void) {
 // bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 //     if (record->event.pressed) {
 //         switch (keycode) {
-//             case KC_CAPS:
+//  case KC_CAPS:
 //                  static int v = 40;
 //                  rgblight_sethsv_at(0,128,v, 0);
 //                  v = v == 0 ? 40 : 0;
