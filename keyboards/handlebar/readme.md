@@ -125,6 +125,9 @@ Columns, left to right:
 [X] Add a `UC_NEXT` key to move through the Unicode input methods
 [X] Consider the dash/underscore move to %/^
 [X] Consider the quote/dquot move to SYM
-[ ] Add QMK_RESET
-[ ] Debug why sometimes the Caps LED is in the wrong state
+[X] Turn off the Elite LEDs
+[X] Add QMK_RESET
+[X] Debug why sometimes the Caps LED is in the wrong state
+[ ] Volume and track controls do not work
+
 

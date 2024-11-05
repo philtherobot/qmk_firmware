@@ -114,11 +114,11 @@ void set_extend_layer(bool on)
 {
     if(on) {
         layer_on(EXTEND);
-        rgblight_sethsv_at(135,240,40, 0);
+        rgblight_sethsv_at(HSV_BLUE, 0);
     }
     else {
         layer_off(EXTEND);
-        rgblight_sethsv_at(135,240,0, 0);
+        rgblight_sethsv_at(HSV_OFF, 0);
     }                    
 }
 
@@ -171,10 +171,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 bool led_update_user(led_t led_state) {
     if(led_state.caps_lock) {
-        rgblight_sethsv_at(15,200,0, 1);
+        rgblight_sethsv_at(HSV_PINK, 1);
     }
     else {
-        rgblight_sethsv_at(15,200,40, 1);
+        rgblight_sethsv_at(HSV_OFF, 1);
     }
 
     return false; // do not process any further
@@ -220,7 +220,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       //-----------//--------//----------------//-----------//-----------//-----------     //-----------//-----------//-----------//-----------//-----------//-----------
                              KC_F2,            KC_F3,       KC_F4,       KC_F5,            KC_F6,       KC_F7,       KC_F8,       KC_F9,
       KC_F1,       _______,  _______,          KC_VOLD,     KC_MUTE,     KC_VOLU,          KC_F11,      KC_F12,      _______,     KC_PSCR,     KC_PAUSE,    KC_F10,
-      _______,     _______,  _______,          KC_MPRV,     KC_MPLY,     KC_MNXT,          _______,     _______,     _______,     _______,     _______,     UC_NEXT,
+      _______,     _______,  _______,          KC_MPRV,     KC_MPLY,     KC_MNXT,          _______,     _______,     _______,     _______,     QK_REBOOT,   UC_NEXT,
                    _______,  CUSTOM_KC_EMAIL,  _______,     _______,     _______,          _______,     _______,     _______,     _______,     QK_BOOT,
                              _______,          _______,     KC_LGUI,     _______,          _______,     _______,     KC_RALT,     _______
     )
@@ -235,20 +235,6 @@ void keyboard_post_init_user(void) {
   //debug_mouse=true;
 
   // start with indicator off
-  rgblight_sethsv_at(0,0,0, 0);
-  rgblight_sethsv_at(0,0,0, 1);
+  rgblight_sethsv_at(HSV_OFF, 0);
+  rgblight_sethsv_at(HSV_OFF, 1);
 }
-
-// bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-//     if (record->event.pressed) {
-//         switch (keycode) {
-//  case KC_CAPS:
-//                  static int v = 40;
-//                  rgblight_sethsv_at(0,128,v, 0);
-//                  v = v == 0 ? 40 : 0;
-//                  break;
-//         }
-//     }
-
-//     return true;
-// }
