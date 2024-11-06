@@ -180,14 +180,19 @@ bool led_update_user(led_t led_state) {
     return false; // do not process any further
 }
 
+#define ALT_TAB LALT(KC_TAB)
+#define SALT_TAB LSFT(LALT(KC_TAB))
+#define CTL_TAB LCTL(KC_TAB)
+#define SCTL_TAB LSFT(LCTL(KC_TAB))
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASE] = 
     { VISUAL_TO_MATRIX( 
-                                  KC_2,    KC_3,    KC_4,    KC_5,        KC_6,           KC_7,    KC_8,     KC_9,
-      KC_1,              KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,        KC_J,           KC_L,    KC_U,     KC_Y,    KC_SCLN, KC_0,
-      CUSTOM_KC_EXTEND,  KC_A,    KC_R,    KC_S,    KC_T,    KC_G,        KC_M,           KC_N,    KC_E,     KC_I,    KC_O,    KC_BSLS,
-                         KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,        KC_K,           KC_H,    KC_COMM,  KC_DOT,  KC_SLSH,
-                                  KC_LCTL, KC_SPC,  KC_LSFT, KC_LALT,     OSL(SYMBOLS1),  KC_RSFT, KC_ENT,   OSL(FN)
+                                  KC_2,    KC_3,    KC_4,    KC_5,        KC_6,    KC_7,         KC_8,     KC_9,
+      KC_1,              KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,        KC_J,    KC_L,         KC_U,     KC_Y,    KC_SCLN, KC_0,
+      CUSTOM_KC_EXTEND,  KC_A,    KC_R,    KC_S,    KC_T,    KC_G,        KC_M,    KC_N,         KC_E,     KC_I,    KC_O,    KC_BSLS,
+                         KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,        KC_K,    KC_H,         KC_COMM,  KC_DOT,  KC_SLSH,
+                                  KC_LCTL, KC_SPC,  KC_LSFT, KC_LALT,     KC_RSFT, MO(SYMBOLS1), KC_ENT,   OSL(FN)
     )
     },
 
@@ -199,7 +204,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______,     _______,     KC_ESC,      KC_INS,      KC_CAPS,     KC_MS_UP,         KC_PGUP,     KC_HOME,     KC_UP,       KC_END,      KC_DEL,      _______,
       _______,     _______,     KC_LALT,     KC_LSFT,     KC_LCTL,     KC_MS_DOWN,       KC_PGDN,     KC_LEFT,     KC_DOWN,     KC_RIGHT,    KC_BSPC,     _______,
                    _______,     LCTL(KC_X),  LCTL(KC_C),  LCTL(KC_D),  LCTL(KC_V),       KC_MS_BTN1,  KC_MS_BTN3,  KC_MS_BTN2,  KC_MS_LEFT,  KC_MS_RIGHT,
-                                _______,     LCTL(KC_Z),  _______,     _______,          KC_TAB,      _______,     _______,     _______
+                                _______,     LCTL(KC_Z),  _______,     _______,          KC_RSFT,     KC_TAB,      _______,     _______
     )
     },
 
@@ -221,8 +226,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              KC_F2,            KC_F3,       KC_F4,       KC_F5,            KC_F6,       KC_F7,       KC_F8,       KC_F9,
       KC_F1,       _______,  _______,          KC_VOLD,     KC_MUTE,     KC_VOLU,          KC_F11,      KC_F12,      _______,     KC_PSCR,     KC_PAUSE,    KC_F10,
       _______,     _______,  _______,          KC_MPRV,     KC_MPLY,     KC_MNXT,          _______,     _______,     _______,     _______,     QK_REBOOT,   UC_NEXT,
-                   _______,  CUSTOM_KC_EMAIL,  _______,     _______,     _______,          _______,     _______,     _______,     _______,     QK_BOOT,
-                             _______,          _______,     KC_LGUI,     _______,          _______,     _______,     KC_RALT,     _______
+                   _______,  CUSTOM_KC_EMAIL,  SCTL_TAB,    CTL_TAB,     _______,          _______,     _______,     _______,     _______,     QK_BOOT,
+                             SALT_TAB,         ALT_TAB,     KC_LGUI,     _______,          _______,     _______,     KC_RALT,     _______
     )
     }
 };

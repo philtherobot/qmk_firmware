@@ -128,6 +128,5 @@ Columns, left to right:
 [X] Turn off the Elite LEDs
 [X] Add QMK_RESET
 [X] Debug why sometimes the Caps LED is in the wrong state
+[X] Add Ctrl-Tab and Alt-Tab to the Fn layer
 [ ] Volume and track controls do not work
-
-
