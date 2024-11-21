@@ -204,7 +204,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______,     _______,     KC_ESC,      KC_INS,      KC_CAPS,     KC_MS_UP,         KC_PGUP,     KC_HOME,     KC_UP,       KC_END,      KC_DEL,      _______,
       _______,     _______,     KC_LALT,     KC_LSFT,     KC_LCTL,     KC_MS_DOWN,       KC_PGDN,     KC_LEFT,     KC_DOWN,     KC_RIGHT,    KC_BSPC,     _______,
                    _______,     LCTL(KC_X),  LCTL(KC_C),  LCTL(KC_D),  LCTL(KC_V),       KC_MS_BTN1,  KC_MS_BTN3,  KC_MS_BTN2,  KC_MS_LEFT,  KC_MS_RIGHT,
-                                _______,     LCTL(KC_Z),  _______,     _______,          KC_RSFT,     KC_TAB,      _______,     _______
+                                _______,     LCTL(KC_Z),  KC_LSFT,     KC_TAB,           KC_RSFT,      _______,     _______,     _______
     )
     },
 
