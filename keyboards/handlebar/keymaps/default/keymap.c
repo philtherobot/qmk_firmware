@@ -104,7 +104,8 @@ const uint32_t unicode_map[] PROGMEM = {
 
 enum custom_keycodes {
     CUSTOM_KC_EMAIL = SAFE_RANGE,
-    CUSTOM_KC_EXTEND
+    CUSTOM_KC_EXTEND,
+    CUSTOM_KC_CPP_ARROW
 };
 
 bool locked_into_extend = false;
@@ -136,6 +137,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         switch (keycode) {
             case CUSTOM_KC_EMAIL:
                  SEND_STRING("philtherobot@gmail.com");
+                 return false;
+            case CUSTOM_KC_CPP_ARROW:
+                 SEND_STRING("->");
                  return false;
             case CUSTOM_KC_EXTEND:
                 extend_is_pressed = true;
@@ -211,12 +215,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [SYMBOLS1] = 
     { VISUAL_TO_MATRIX( 
-      //-----------//-------------//-------------//-----------------//-----------//-----------     //----------------//-----------------//------------------//-----------------//-----------------//-----------
-                                  _______,       _______,           _______,     _______,          _______,           _______,           _______,           _______,
-      KC_GRV,      UM(LAngQuot),  UM(RAngQuot),  S(KC_LBRC),        S(KC_RBRC),  _______,          _______,           UP(agrav, Agrav),  UP(ocirc, Ocirc),  UP(acirc, Acirc),  UP(icirc, Icirc),  KC_DQUO,
-      _______,     KC_LBRC,       KC_RBRC,       S(KC_9),           S(KC_0),     _______,          UP(idiae, Idiae),  UP(eacut, Eacut),  UP(egrav, Egrav),  UP(ecirc, Ecirc),  UP(ediae, Ediae),  KC_QUOT,
-                   _______,       _______,       UP(ccedi, Ccedi),  KC_EQL,      S(KC_EQL),        KC_MINS,           KC_UNDS,           UP(ucirc, Ucirc),  UP(ugrav, Ugrav),  UP(udiae, Udiae),
-                                  _______,       _______,           _______,     _______,          _______,           _______,           _______,           _______
+      //-----------//-------------//-------------//-----------------//-----------//-----------             //----------------//-----------------//------------------//-----------------//-----------------//-----------
+                                  _______,       _______,           _______,     _______,                  _______,           _______,           _______,           _______,
+      KC_GRV,      UM(LAngQuot),  UM(RAngQuot),  S(KC_LBRC),        S(KC_RBRC),  _______,                  _______,           UP(agrav, Agrav),  UP(ocirc, Ocirc),  UP(acirc, Acirc),  UP(icirc, Icirc),  KC_DQUO,
+      _______,     KC_LBRC,       KC_RBRC,       S(KC_9),           S(KC_0),     CUSTOM_KC_CPP_ARROW,      UP(idiae, Idiae),  UP(eacut, Eacut),  UP(egrav, Egrav),  UP(ecirc, Ecirc),  UP(ediae, Ediae),  KC_QUOT,
+                   _______,       _______,       UP(ccedi, Ccedi),  KC_EQL,      S(KC_EQL),                KC_MINS,           KC_UNDS,           UP(ucirc, Ucirc),  UP(ugrav, Ugrav),  UP(udiae, Udiae),
+                                  _______,       _______,           _______,     _______,                  _______,           _______,           _______,           _______
     )
     },
 
@@ -226,17 +230,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              KC_F2,            KC_F3,       KC_F4,       KC_F5,            KC_F6,       KC_F7,       KC_F8,       KC_F9,
       KC_F1,       _______,  _______,          KC_VOLD,     KC_MUTE,     KC_VOLU,          KC_F11,      KC_F12,      _______,     KC_PSCR,     KC_PAUSE,    KC_F10,
       _______,     _______,  _______,          KC_MPRV,     KC_MPLY,     KC_MNXT,          _______,     _______,     _______,     _______,     QK_REBOOT,   UC_NEXT,
-                   _______,  CUSTOM_KC_EMAIL,  SCTL_TAB,    CTL_TAB,     _______,          _______,     _______,     _______,     _______,     QK_BOOT,
+                   _______,  CUSTOM_KC_EMAIL,  _______,     _______,     _______,          _______,     _______,     _______,     _______,     QK_BOOT,
                              SALT_TAB,         ALT_TAB,     KC_LGUI,     _______,          _______,     _______,     KC_RALT,     _______
     )
     }
 };
 
-void keyboard_post_init_user(void) {
+void keyboard_post_init_user(void) { 
   // Customise these values to desired behaviour
-  debug_enable=true;
-  debug_matrix=true;
-  //debug_keyboard=true;
+  debug_enable=false;
+  debug_matrix=false;
+  debug_keyboard=false;
   //debug_mouse=true;
 
   // start with indicator off

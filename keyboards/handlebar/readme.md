@@ -129,4 +129,4 @@ Columns, left to right:
 [X] Add QMK_RESET
 [X] Debug why sometimes the Caps LED is in the wrong state
 [X] Add Ctrl-Tab and Alt-Tab to the Fn layer
-[ ] Volume and track controls do not work
+[X] Volume and track controls do not work

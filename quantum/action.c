@@ -372,7 +372,7 @@ void process_action(keyrecord_t *record, action_t action) {
     bool do_release_oneshot = false;
     // notice we only clear the one shot layer if the pressed key is not a modifier.
     if (is_oneshot_layer_active() && event.pressed &&
-        (action.kind.id == ACT_USAGE || !(IS_MODIFIER_KEYCODE(action.key.code)
+        (action.kind.id == ACT_USAGE  || !(/*PHP false*/IS_MODIFIER_KEYCODE(action.key.code)
 #    ifndef NO_ACTION_TAPPING
                                           || ((action.kind.id == ACT_LMODS_TAP || action.kind.id == ACT_RMODS_TAP) && (action.layer_tap.code <= MODS_TAP_TOGGLE || tap_count == 0))
 #    endif
