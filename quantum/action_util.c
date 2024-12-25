@@ -199,10 +199,17 @@ void reset_oneshot_layer(void) {
 void clear_oneshot_layer_state(oneshot_fullfillment_t state) {
     uint8_t start_state = oneshot_layer_data;
     oneshot_layer_data &= ~state;
+
+    dprintf("PHP clear_oneshot_layer_state %d %d %d %d %d\n", state, get_oneshot_layer_state(), start_state, oneshot_layer_data, keymap_config.oneshot_enable);
+
     if ((!get_oneshot_layer_state() && start_state != oneshot_layer_data) && keymap_config.oneshot_enable) {
+        dprint("PHP clear_oneshot_layer_state layer off\n");
         layer_off(get_oneshot_layer());
         reset_oneshot_layer();
     }
+    else {
+        dprint("PHP clear_oneshot_layer_state no change\n");
+    }   
 }
 /** \brief Is oneshot layer active
  *

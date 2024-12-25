@@ -117,6 +117,29 @@ Columns, left to right:
 - inner, B3
 
 
+# Test table
+
+Aside from the obvious keys of course...
+
+Alt + spc
+Win + D (and other letters such as V and E)
+Win + Shf + S
+Media keys
+Alt + Tab (including holding Alt and repeating Tab)
+Alt + Shf + Tab
+Ctl + Tab (including holding Ctl and repeating Tab)
+Ctl + Shf + Tab
+Ctl + Alt + arrows (for multiple cursors)
+Ctl + '-' '+' '=' (zooming)
+Ctl + [letter, number or Fx]
+Ctl + Fx
+Shf + Fx
+Alt + Fx
+PrintScreen
+ScrollLock
+Pause
+
+
 # TODO
 
 [X] Roll / to .
@@ -130,3 +153,6 @@ Columns, left to right:
 [X] Debug why sometimes the Caps LED is in the wrong state
 [X] Add Ctrl-Tab and Alt-Tab to the Fn layer
 [X] Volume and track controls do not work
+[X] RAlt cannot be used to access WinCompose
+[ ] Indicator when we are on the Linux Unicode mode (UC_NEXT)
+

@@ -274,6 +274,8 @@ void process_record(keyrecord_t *record) {
     if (!process_record_quantum(record)) {
 #ifndef NO_ACTION_ONESHOT
         if (is_oneshot_layer_active() && record->event.pressed && keymap_config.oneshot_enable) {
+            // this is where we get out of the Fn oneshot layer
+            dprintf("PHP clearing the oneshot layer, process_record\n");
             clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
         }
 #endif
@@ -381,6 +383,7 @@ void process_action(keyrecord_t *record, action_t action) {
         && !(action.kind.id == ACT_SWAP_HANDS && action.swap.code == OP_SH_ONESHOT)
 #    endif
         && keymap_config.oneshot_enable) {
+        dprintf("PHP clearing the oneshot layer, process_action\n");
         clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
         do_release_oneshot = !is_oneshot_layer_active();
     }
@@ -674,6 +677,7 @@ void process_action(keyrecord_t *record, action_t action) {
                         } else {
                             clear_oneshot_layer_state(ONESHOT_PRESSED);
                             if (tap_count > 1) {
+                                dprintf("PHP clearing the oneshot layer, process_action\n");
                                 clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
                             }
                         }

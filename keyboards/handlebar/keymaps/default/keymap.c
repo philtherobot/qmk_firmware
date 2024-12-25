@@ -105,7 +105,8 @@ const uint32_t unicode_map[] PROGMEM = {
 enum custom_keycodes {
     CUSTOM_KC_EMAIL = SAFE_RANGE,
     CUSTOM_KC_EXTEND,
-    CUSTOM_KC_CPP_ARROW
+    CUSTOM_KC_CPP_ARROW,
+    CUSTOM_KC_WIN
 };
 
 bool locked_into_extend = false;
@@ -136,12 +137,28 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {
         switch (keycode) {
             case CUSTOM_KC_EMAIL:
-                 SEND_STRING("philtherobot@gmail.com");
-                 return false;
+                SEND_STRING("philtherobot@gmail.com");
+                return false;
             case CUSTOM_KC_CPP_ARROW:
-                 SEND_STRING("->");
-                 return false;
+                SEND_STRING("->");
+                return false;
+            case CUSTOM_KC_WIN:
+                dprintf("Win pressed on the Fn layer\n");
+                register_mods(MOD_BIT(KC_LGUI));
+                return false;
+            case KC_RALT:
+                dprintf("RAlt pressed on the Fn layer\n");
+                clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
+                register_mods(MOD_BIT(KC_RALT));
+                return false;
             case CUSTOM_KC_EXTEND:
+                /*
+                This part, the Extend + RShf that toggles the Extend layer may be 
+                implemented differently. The Extend key could be set to be a normal
+                access to the layer and the RShf in the Extend layer could a toggle
+                layer button.
+                MO(EXTEND) and TG(EXTEND)
+                */
                 extend_is_pressed = true;
                 bool const isRightShift = get_mods() & MOD_BIT(KC_RIGHT_SHIFT);
                 if(isRightShift) {
@@ -166,6 +183,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             case CUSTOM_KC_EXTEND:
                 extend_is_pressed = false;
                 if(!locked_into_extend) set_extend_layer(false);
+                return false;
+            case CUSTOM_KC_WIN:
+                dprintf("Win released on the Fn layer\n");
+                unregister_mods(MOD_BIT(KC_LGUI));
+                return false;
+            case KC_RALT:
+                dprintf("RAlt released on the Fn layer\n");
+                unregister_mods(MOD_BIT(KC_RALT));
                 return false;
         }
     }
@@ -208,7 +233,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______,     _______,     KC_ESC,      KC_INS,      KC_CAPS,     KC_MS_UP,         KC_PGUP,     KC_HOME,     KC_UP,       KC_END,      KC_DEL,      _______,
       _______,     _______,     KC_LALT,     KC_LSFT,     KC_LCTL,     KC_MS_DOWN,       KC_PGDN,     KC_LEFT,     KC_DOWN,     KC_RIGHT,    KC_BSPC,     _______,
                    _______,     LCTL(KC_X),  LCTL(KC_C),  LCTL(KC_D),  LCTL(KC_V),       KC_MS_BTN1,  KC_MS_BTN3,  KC_MS_BTN2,  KC_MS_LEFT,  KC_MS_RIGHT,
-                                _______,     LCTL(KC_Z),  KC_LSFT,     KC_TAB,           KC_RSFT,      _______,     _______,     _______
+                                LCTL(KC_Z),  _______,     _______,     KC_TAB,           _______,     _______,     _______,     _______
     )
     },
 
@@ -226,21 +251,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [FN] = 
     { VISUAL_TO_MATRIX( 
-      //-----------//--------//----------------//-----------//-----------//-----------     //-----------//-----------//-----------//-----------//-----------//-----------
-                             KC_F2,            KC_F3,       KC_F4,       KC_F5,            KC_F6,       KC_F7,       KC_F8,       KC_F9,
-      KC_F1,       _______,  _______,          KC_VOLD,     KC_MUTE,     KC_VOLU,          KC_F11,      KC_F12,      _______,     KC_PSCR,     KC_PAUSE,    KC_F10,
-      _______,     _______,  _______,          KC_MPRV,     KC_MPLY,     KC_MNXT,          _______,     _______,     _______,     _______,     QK_REBOOT,   UC_NEXT,
-                   _______,  CUSTOM_KC_EMAIL,  _______,     _______,     _______,          _______,     _______,     _______,     _______,     QK_BOOT,
-                             SALT_TAB,         ALT_TAB,     KC_LGUI,     _______,          _______,     _______,     KC_RALT,     _______
+      //-----------//--------//----------------//--------------//-----------//-----------     //-----------//-----------//-----------//-----------//---------//-----------
+                             KC_F2,            KC_F3,          KC_F4,       KC_F5,            KC_F6,       KC_F7,       KC_F8,       KC_F9,
+      KC_F1,       _______,  _______,          KC_VOLD,        KC_MUTE,     KC_VOLU,          KC_F11,      KC_F12,      KC_SCRL,     KC_PSCR,     KC_PAUSE,  KC_F10,
+      _______,     _______,  _______,          KC_MPRV,        KC_MPLY,     KC_MNXT,          _______,     _______,     _______,     _______,     _______,   UC_NEXT,
+                   _______,  CUSTOM_KC_EMAIL,  _______,        _______,     _______,          _______,     _______,     _______,     _______,     _______,
+                             _______,          CUSTOM_KC_WIN,  _______,     _______,          _______,     _______,     KC_RALT,     _______
     )
     }
 };
 
 void keyboard_post_init_user(void) { 
   // Customise these values to desired behaviour
-  debug_enable=false;
-  debug_matrix=false;
-  debug_keyboard=false;
+  //debug_enable=true;
+  //debug_matrix=true;
+  //debug_keyboard=true;
   //debug_mouse=true;
 
   // start with indicator off
