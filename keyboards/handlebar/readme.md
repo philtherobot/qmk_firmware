@@ -121,6 +121,7 @@ Columns, left to right:
 
 Aside from the obvious keys of course...
 
+Ctl + Alt + Del
 Alt + spc
 Win + D (and other letters such as V and E)
 Win + Shf + S
@@ -156,3 +157,67 @@ Pause
 [X] RAlt cannot be used to access WinCompose
 [ ] Indicator when we are on the Linux Unicode mode (UC_NEXT)
 
+
+# Next generation
+
+Mostly upgrades to handlebar.
+
+See the Naya Create. 
+
+The thumb keys should have their front facing edge sculpted to not have a sharp edge.
+
+For handlebar, Ctrl-Alt is hard, Ctrl and Alt are on the same side. They should be opposed.
+
+I might want to have Win at the thumb, but really, it is not used that much.
+
+Also, I might consider putting Extend at the thumb. That is used a lot anc having a stronger finger, the thumb, for this would a good eregonomic choice.
+
+I want a case this time. 
+
+On the Extent layer, I want to have access to the following normal keys: 
+- comma
+- dot
+- semi-colon
+- parens
+- braces
+- Enter
+
+This is for when I am on the Extend layer, locked, for extensive editing, I can add a few symbols to complete the edits. It never is new identifiers, but commas and braces are often needed. Maybe I should swap Extend and Alt. But this meshes with the changes to Alt and Fn, see below.
+
+Ctrl-Z on Extend has to be on the Z.
+
+Wheel mouse support. Maybe on Extend, on the far left, use "0" and" "\". Or Fn.
+
+## Opposed Ctrl and Alt
+
+
+The secret sauce to have all the combos doable with two separate hands is to use four keys, versus the minimal three. Basically, you choose one key that is on both sides and the other two are on opposite sides. Easiest is to have Shift both sides:
+
+```
+Ctrl  Spc  Shf         _1_ Ent _2_
+              ___   Shf
+```
+
+Alt can go at either positions "1" or "2".
+
+Ctrl and Shift are already in good positions, Space and Enter have to stay.  Alt has simply to go on the other side:
+
+```
+Ctrl  Spc  Shf         Sym Ent Alt
+              Fn   Shf
+```
+
+Now we want Extend to be on the thumb. We have to kick out Fn, placing Fn at the left pinky. On the Extend layer, Tab is also relocated to the left pink, its historic position.
+
+
+## Mouse support
+
+I am getting better at navigating without the mouse, but at least in the Telesat environment, the web browsers have no easy keyboard navigation. Tools much as both mouseless software do not play well with Remote Desktop. Some parts of important software such as VS Code do not have great keyboard support. So maybe after some more experimentation and learning (June 2025), we will learn that I do no need the mouse enough after all or that mouse use is still too frequent.
+
+If mouse use is too frequent, we can add a pointing stick. They are cheap. Place it at the right middle finger, right and below the N. Squeeze in a small wheel mouse (it could be a touchpad) left of the J and M, on a diagonal to fit the layout of the right index finger will reach out to it.
+
+Mouse buttons, I am not sure yet. Some experimentation needs to take place. But here are two ideas.
+
+One, place vertical buttons at the edge of the right Shift, two could probably fit. 
+
+Or option two, place them on the left side, right of G and V.
