@@ -230,8 +230,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     { VISUAL_TO_MATRIX( 
       //-----------//-----------//-----------//-----------//-----------//-----------     //-----------//-----------//-----------//-----------//-----------//-----------
                                 _______,     _______,     _______,     _______,          _______,     _______,     _______,     _______,
-      _______,     _______,     KC_ESC,      KC_INS,      KC_CAPS,     KC_MS_UP,         KC_PGUP,     KC_HOME,     KC_UP,       KC_END,      KC_DEL,      _______,
-      KC_TAB,      _______,     KC_LALT,     KC_LSFT,     KC_LCTL,     KC_MS_DOWN,       KC_PGDN,     KC_LEFT,     KC_DOWN,     KC_RIGHT,    KC_BSPC,     _______,
+      _______,     _______,     KC_ESC,      KC_INS,      KC_CAPS,     KC_MS_UP,         KC_PGUP,     KC_HOME,     KC_UP,       KC_END,      KC_DEL,      KC_MS_WH_UP,
+      KC_TAB,      _______,     KC_LALT,     KC_LSFT,     KC_LCTL,     KC_MS_DOWN,       KC_PGDN,     KC_LEFT,     KC_DOWN,     KC_RIGHT,    KC_BSPC,     KC_MS_WH_DOWN,
                    LCTL(KC_Z),  LCTL(KC_X),  LCTL(KC_C),  LCTL(KC_D),  LCTL(KC_V),       KC_MS_BTN1,  KC_MS_BTN3,  KC_MS_BTN2,  KC_MS_LEFT,  KC_MS_RIGHT,
                                 _______,     _______,     _______,     _______,          _______,     _______,     _______,     _______
     )
