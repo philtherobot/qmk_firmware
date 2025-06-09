@@ -184,8 +184,6 @@ On the Extent layer, I want to have access to the following normal keys:
 
 This is for when I am on the Extend layer, locked, for extensive editing, I can add a few symbols to complete the edits. It never is new identifiers, but commas and braces are often needed. Maybe I should swap Extend and Alt. But this meshes with the changes to Alt and Fn, see below.
 
-Ctrl-Z on Extend has to be on the Z.
-
 Wheel mouse support. Maybe on Extend, on the far left, use "0" and" "\". Or Fn.
 
 ## Opposed Ctrl and Alt
@@ -215,6 +213,8 @@ Now we want Extend to be on the thumb. We have to kick out Fn, placing Fn at the
 I am getting better at navigating without the mouse, but at least in the Telesat environment, the web browsers have no easy keyboard navigation. Tools much as both mouseless software do not play well with Remote Desktop. Some parts of important software such as VS Code do not have great keyboard support. So maybe after some more experimentation and learning (June 2025), we will learn that I do no need the mouse enough after all or that mouse use is still too frequent.
 
 If mouse use is too frequent, we can add a pointing stick. They are cheap. Place it at the right middle finger, right and below the N. Squeeze in a small wheel mouse (it could be a touchpad) left of the J and M, on a diagonal to fit the layout of the right index finger will reach out to it.
+
+A pointing stick needs a "wheel scroll" button. Plan for that.
 
 Mouse buttons, I am not sure yet. Some experimentation needs to take place. But here are two ideas.
 
