@@ -32,6 +32,7 @@ Enter the bootloader in 3 ways:
 qmk --help
 qmk new-keyboard
 qmk compile -kb handlebar -km default
+qmk flash -kb handlebar -km default
 ``` 
 
 I answered that the MCU was Elite-C (option 7). The Elite-C has an Atmega32u4 and flashes with DFU.
@@ -43,12 +44,18 @@ I picked split 3x5 (not sure) keyboard layout.
 - Launch QMK MSYS.
 - To build: `qmk compile -kb handlebar -km default`
 - To lint: `qmk lint -kb handlebar`
-- Start QMK Toolbox
-- File is at `$QMK/handlebar_default.hex`
-- Connect the USB
-- Wait for QMK Toolbox to see the connection
-- Press Reset, wait 8 seconds
-- Click `Flash`.
+- Windows:
+  - Start QMK Toolbox
+  - File is at `$QMK/handlebar_default.hex`
+  - Connect the USB
+  - Wait for QMK Toolbox to see the connection
+  - Press Reset, wait 8 seconds
+  - Click `Flash`.
+- Linux:
+  - Connect the USB
+  - Press Reset, wait 8 seconds
+  - `qmk flash -kb handlebar -km default`
+ 
 
 Updated instructions:
 - Start QMK Toolbox
