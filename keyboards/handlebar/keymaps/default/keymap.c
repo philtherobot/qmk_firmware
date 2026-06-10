@@ -27,6 +27,8 @@ enum layers{
   EXTEND,
   SYMBOLS1,
   FN,
+  ONSHAPE,
+  LFNUMPAD   
 };
 
 
@@ -106,7 +108,11 @@ enum custom_keycodes {
     CUSTOM_KC_EMAIL = SAFE_RANGE,
     CUSTOM_KC_EXTEND,
     CUSTOM_KC_CPP_ARROW,
-    CUSTOM_KC_WIN
+    CUSTOM_KC_WIN,
+    CUSTOM_KC_DEG,
+    CUSTOM_KC_INCH,
+    CUSTOM_KC_METER,
+    CUSTOM_KC_MM
 };
 
 bool locked_into_extend = false;
@@ -141,6 +147,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 return false;
             case CUSTOM_KC_CPP_ARROW:
                 SEND_STRING("->");
+                return false;
+            case CUSTOM_KC_DEG:
+                SEND_STRING("deg");
+                return false;
+            case CUSTOM_KC_INCH:
+                SEND_STRING("in");
+                return false;
+            case CUSTOM_KC_METER:
+                SEND_STRING("m");
+                return false;
+            case CUSTOM_KC_MM:
+                SEND_STRING("mm");
                 return false;
             case CUSTOM_KC_WIN:
                 dprintf("Win pressed on the Fn layer\n");
@@ -213,6 +231,7 @@ bool led_update_user(led_t led_state) {
 #define SALT_TAB LSFT(LALT(KC_TAB))
 #define CTL_TAB LCTL(KC_TAB)
 #define SCTL_TAB LSFT(LCTL(KC_TAB))
+#define MUTE LGUI(LALT(KC_K))
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASE] = 
@@ -228,7 +247,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [EXTEND] = 
     { VISUAL_TO_MATRIX( 
-      //-----------//-----------//-----------//-----------//-----------//-----------     //-----------//-----------//-----------//-----------//-----------//-----------
                                 _______,     _______,     _______,     _______,          _______,     _______,     _______,     _______,
       _______,     _______,     KC_ESC,      KC_INS,      KC_CAPS,     KC_MS_UP,         KC_PGUP,     KC_HOME,     KC_UP,       KC_END,      KC_DEL,      KC_MS_WH_UP,
       KC_TAB,      _______,     KC_LALT,     KC_LSFT,     KC_LCTL,     KC_MS_DOWN,       KC_PGDN,     KC_LEFT,     KC_DOWN,     KC_RIGHT,    KC_BSPC,     KC_MS_WH_DOWN,
@@ -240,7 +258,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [SYMBOLS1] = 
     { VISUAL_TO_MATRIX( 
-      //-----------//-------------//-------------//-----------------//-----------//-----------             //----------------//-----------------//------------------//-----------------//-----------------//-----------
                                   _______,       _______,           _______,     _______,                  _______,           _______,           _______,           _______,
       KC_GRV,      UM(LAngQuot),  UM(RAngQuot),  S(KC_LBRC),        S(KC_RBRC),  _______,                  _______,           UP(agrav, Agrav),  UP(ocirc, Ocirc),  UP(acirc, Acirc),  UP(icirc, Icirc),  KC_DQUO,
       _______,     KC_LBRC,       KC_RBRC,       S(KC_9),           S(KC_0),     CUSTOM_KC_CPP_ARROW,      UP(idiae, Idiae),  UP(eacut, Eacut),  UP(egrav, Egrav),  UP(ecirc, Ecirc),  UP(ediae, Ediae),  KC_QUOT,
@@ -251,12 +268,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [FN] = 
     { VISUAL_TO_MATRIX( 
-      //-----------//--------//----------------//--------------//-----------//-----------     //-----------//-----------//-----------//-----------//---------//-----------
                              KC_F2,            KC_F3,          KC_F4,       KC_F5,            KC_F6,       KC_F7,       KC_F8,       KC_F9,
       KC_F1,       _______,  _______,          KC_VOLD,        KC_MUTE,     KC_VOLU,          KC_F11,      KC_F12,      KC_SCRL,     KC_PSCR,     KC_PAUSE,  KC_F10,
-      _______,     _______,  _______,          KC_MPRV,        KC_MPLY,     KC_MNXT,          _______,     _______,     _______,     _______,     _______,   UC_NEXT,
-                   _______,  CUSTOM_KC_EMAIL,  _______,        _______,     _______,          _______,     _______,     _______,     _______,     _______,
+      _______,     MUTE,     _______,          KC_MPRV,        KC_MPLY,     KC_MNXT,          _______,     _______,     _______,     _______,     _______,   UC_NEXT,
+                   _______,  CUSTOM_KC_EMAIL,  TO(ONSHAPE),    _______,     _______,          _______,     _______,     _______,     _______,     _______,
                              _______,          CUSTOM_KC_WIN,  _______,     KC_LALT,          _______,     _______,     _______,     KC_RALT     
+    )
+    },
+
+    [ONSHAPE] = 
+    { VISUAL_TO_MATRIX( 
+                                  S(KC_3),  S(KC_4),   S(KC_5),  S(KC_6),        _______,     _______,     _______,     _______,
+      S(KC_1),     S(KC_2),       KC_F,     S(KC_E),   S(KC_S),  KC_U,           _______,     _______,     _______,     _______,     _______,   _______,
+      _______,     _______,       _______,  KC_C,      KC_L,     KC_N,           _______,     _______,     _______,     _______,     _______,   _______,
+                   TG(LFNUMPAD),  _______,  TO(BASE),  KC_D,     KC_I,           _______,     _______,     _______,     _______,     _______,
+                                  KC_LCTL,  KC_SPC,    KC_ENT,   KC_LSFT,        _______,     _______,     _______,     _______     
+    )
+    },
+
+    [LFNUMPAD] = 
+    { VISUAL_TO_MATRIX( 
+                                  CUSTOM_KC_DEG,    CUSTOM_KC_INCH, CUSTOM_KC_METER,  CUSTOM_KC_MM,     _______,     _______,     _______,     _______,
+      _______,     KC_KP_EQUAL,   KC_KP_PLUS,       KC_7,           KC_8,             KC_9,             _______,     _______,     _______,     _______,     _______,   _______,
+      _______,     KC_KP_SLASH,   KC_KP_MINUS,      KC_4,           KC_5,             KC_6,             _______,     _______,     _______,     _______,     _______,   _______,
+                   TG(LFNUMPAD),  KC_KP_ASTERISK,   KC_1,           KC_2,             KC_3,             _______,     _______,     _______,     _______,     _______,
+                                  KC_0,             KC_DOT,         KC_ENT,           KC_BSPC,          _______,     _______,     _______,     _______     
     )
     }
 };
