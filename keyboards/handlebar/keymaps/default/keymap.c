@@ -26,9 +26,9 @@ enum layers{
   BASE,
   EXTEND,
   SYMBOLS1,
-  FN,
   ONSHAPE,
-  LFNUMPAD   
+  LFNUMPAD,
+  FN
 };
 
 
@@ -118,25 +118,32 @@ enum custom_keycodes {
 bool locked_into_extend = false;
 bool extend_is_pressed = false;
 
-void set_extend_layer(bool on)
-{
-    if(on) {
-        layer_on(EXTEND);
-        rgblight_sethsv_at(HSV_BLUE, 0);
-    }
-    else {
-        layer_off(EXTEND);
+layer_state_t layer_state_set_user(layer_state_t state) {
+    switch (get_highest_layer(state)) {
+    default: //  for any other layers, or the default layer
+    case BASE:
         rgblight_sethsv_at(HSV_OFF, 0);
-    }                    
+        break;
+    case EXTEND:
+        rgblight_sethsv_at(HSV_BLUE, 0);
+        break;
+    case ONSHAPE:
+        rgblight_sethsv_at(HSV_GREEN, 0);
+        break;
+    case LFNUMPAD:
+        rgblight_sethsv_at(HSV_RED, 0);
+        break;
+    }
+  return state;
 }
 
 void toggle_extend_layer(void) { 
     locked_into_extend = !locked_into_extend;
 
     if(locked_into_extend)
-        set_extend_layer(true);
+        layer_on(EXTEND);
     else
-        set_extend_layer(false);
+        layer_off(EXTEND);
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -183,7 +190,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     toggle_extend_layer();
                 }
                 else {
-                    set_extend_layer(true);
+                    layer_on(EXTEND);
                 }
                 return false;
 
@@ -200,7 +207,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         switch (keycode) {
             case CUSTOM_KC_EXTEND:
                 extend_is_pressed = false;
-                if(!locked_into_extend) set_extend_layer(false);
+                if(!locked_into_extend) layer_off(EXTEND);
                 return false;
             case CUSTOM_KC_WIN:
                 dprintf("Win released on the Fn layer\n");
@@ -271,28 +278,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                   KC_F2,            KC_F3,          KC_F4,       KC_F5,            KC_F6,       KC_F7,       KC_F8,       KC_F9,
       KC_F1,       _______,       _______,          KC_VOLD,        KC_MUTE,     KC_VOLU,          KC_F11,      KC_F12,      KC_SCRL,     KC_PSCR,     KC_PAUSE,  KC_F10,
       _______,     MUTE,          _______,          KC_MPRV,        KC_MPLY,     KC_MNXT,          _______,     _______,     _______,     _______,     _______,   UC_NEXT,
-                   TG(LFNUMPAD),  CUSTOM_KC_EMAIL,  TO(ONSHAPE),    _______,     _______,          _______,     _______,     _______,     _______,     _______,
+                   TG(LFNUMPAD),  CUSTOM_KC_EMAIL,  TG(ONSHAPE),    _______,     _______,          _______,     _______,     _______,     _______,     _______,
                                   _______,          CUSTOM_KC_WIN,  _______,     KC_LALT,          _______,     _______,     _______,     KC_RALT     
     )
     },
 
     [ONSHAPE] = 
     { VISUAL_TO_MATRIX( 
-                              S(KC_3),     S(KC_4),   S(KC_5),  S(KC_6),        _______,     _______,     _______,     _______,
-      S(KC_1),     S(KC_2),   KC_F,        S(KC_E),   S(KC_S),  KC_U,           _______,     _______,     _______,     _______,     _______,   _______,
-      KC_ESC,      KC_DEL,    KC_G,        KC_C,      KC_L,     KC_N,           _______,     _______,     _______,     _______,     _______,   _______,
-                   _______,   LCTL(KC_Z),  TO(BASE),  KC_D,     KC_I,           _______,     _______,     _______,     _______,     _______,
-                              KC_LCTL,     KC_SPC,    KC_ENT,   KC_LSFT,        _______,     _______,     _______,     _______     
+                           S(KC_3),     S(KC_4),   S(KC_5),  S(KC_6),        _______,     _______,     _______,     _______,
+      KC_ESC,   S(KC_2),   KC_F,        S(KC_E),   S(KC_S),  KC_U,           _______,     _______,     _______,     _______,     _______,   _______,
+      _______,  S(KC_1),   KC_G,        KC_C,      KC_L,     KC_N,           _______,     _______,     _______,     _______,     _______,   _______,
+                KC_DEL,    LCTL(KC_Z),  _______,   KC_D,     KC_I,           _______,     _______,     _______,     _______,     _______,
+                           KC_LCTL,     KC_SPC,    KC_ENT,   KC_LSFT,        _______,     _______,     _______,     _______     
     )
     },
 
     [LFNUMPAD] = 
     { VISUAL_TO_MATRIX( 
-                                  CUSTOM_KC_DEG,    CUSTOM_KC_INCH, CUSTOM_KC_METER,  CUSTOM_KC_MM,     _______,     _______,     _______,     _______,
-      _______,     KC_KP_EQUAL,   KC_KP_PLUS,       KC_7,           KC_8,             KC_9,             _______,     _______,     _______,     _______,     _______,   _______,
-      _______,     KC_KP_SLASH,   KC_KP_MINUS,      KC_4,           KC_5,             KC_6,             _______,     _______,     _______,     _______,     _______,   _______,
-                   _______,       KC_KP_ASTERISK,   KC_1,           KC_2,             KC_3,             _______,     _______,     _______,     _______,     _______,
-                                  KC_0,             KC_DOT,         KC_ENT,           KC_BSPC,          _______,     _______,     _______,     _______     
+                                    CUSTOM_KC_DEG,    CUSTOM_KC_INCH, CUSTOM_KC_METER,  CUSTOM_KC_MM,     _______,     _______,     _______,     _______,
+      KC_ESC,        KC_KP_EQUAL,   KC_KP_PLUS,       KC_7,           KC_8,             KC_9,             _______,     _______,     _______,     _______,     _______,   _______,
+      TG(LFNUMPAD),  KC_KP_SLASH,   KC_KP_MINUS,      KC_4,           KC_5,             KC_6,             _______,     _______,     _______,     _______,     _______,   _______,
+                     KC_DEL,        KC_KP_ASTERISK,   KC_1,           KC_2,             KC_3,             _______,     _______,     _______,     _______,     _______,
+                                    KC_0,             KC_DOT,         KC_ENT,           KC_BSPC,          _______,     _______,     _______,     _______     
     )
     }
 };
